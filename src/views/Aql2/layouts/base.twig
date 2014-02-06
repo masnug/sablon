@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  {% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description|default('Nusantara, fast start your laravel web project, coding under pleasure.') }}">
+    <meta name="keywords" content="{{ keywods|default(['Nusantara', 'Starter', 'App', 'Bootstrap', 'Laravel'])|join(',') }}">
+    <meta name="author" content="{{ author|default('Wuri Nugrahadi <nug@nusacreation.com>') }}">
+    <link rel="shortcut icon" href="{{ asset('packages/nusantara/exhibit/ico/favicon.png') }}">
+    <title>{{ title|default('Starter App') }} · {{ site|default('Nusantara') }}</title>
+
+    {% include 'theme::partials.head_scripts' %}
+  {% endblock %}
+  </head>
+
+  <body class="">
+
+    {% block layout %}
+      <div class="container-fluid">
+        {% block content %}{% endblock %}
+      </div>
+    {% endblock %}
+    
+    {% include 'theme::partials.bottom_scripts' %}
+  </body>
+</html>
