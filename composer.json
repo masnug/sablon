@@ -1,0 +1,23 @@
+{
+    "name": "empu/sablon",
+    "description": "",
+    "authors": [
+        {
+            "name": "Wuri Nugrahadi",
+            "email": "w.nugrahadi@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Empu\\Sablon\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
