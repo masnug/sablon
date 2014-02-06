@@ -1,4 +1,5 @@
-<?php namespace Empu\Sablon;
+<?php
+namespace Empu\Sablon;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -18,7 +19,32 @@ class SablonServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('empu/sablon');
+		$this->package('empu/sablon', 'sablon');
+		
+		// register theme view namespace
+		$this->themeNamespace();
+		
+		// include sablon demo routes
+		include __DIR__.'/../../routes.php';
+	}
+
+	/**
+	 * Providing `theme` view namespace
+	 * @return void
+	 */
+	protected function themeNamespace()
+	{
+		$app = $this->app;
+		// get default theme from config
+        $theme = $app['config']->get('sablon::theme', 'default');
+        // register theme namespace directory
+        if ($theme == 'default') {
+	        $app['view']->addNamespace('theme', app_path('views/packages/empu/sablon/Aql2'));
+        }
+        else {
+			$theme_path = $app['config']->get('sablon::themes_path');
+	        $app['view']->addNamespace('theme', "{$theme_path}/{$theme}");
+        }
 	}
 
 	/**
@@ -28,7 +54,8 @@ class SablonServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		// register TwigBridge
+		$this->app->register('TwigBridge\TwigServiceProvider');
 	}
 
 	/**
@@ -38,7 +65,7 @@ class SablonServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		// return array();
 	}
 
 }
