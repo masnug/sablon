@@ -1,0 +1,37 @@
+{% extends 'theme::layouts.base' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default panel-signin">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sign in with your account</h3>
+                </div>
+                <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                        <img src="{{ asset('packages/nusantara/exhibit/img/avatar.png') }}" alt="Avatar" class="img-circle img-profile">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                    {% autoescape false %}
+                        {{ form_open({'class': 'signin-form'}) }}
+                            {{ form_text('username', null, {'class': 'form-control input-lg', 'placeholder': 'Username...'}) }}
+                            {{ form_password('password', {'class': 'form-control input-lg', 'placeholder': 'Password...'}) }}
+                            {{ form_submit('Sign in', {'class': 'btn btn-primary btn-lg btn-block'})}}
+
+                            <a href="#" class="pull-right">Create an account</a>
+                            <label for="stay" class="checkbox">
+                                {{ form_checkbox('stay', 'yes', null, {'id': 'stay'})}}
+                                Stay sign in
+                            </label>
+                        {{ form_close() }}
+                    {% endautoescape %}
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
