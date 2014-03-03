@@ -23,8 +23,10 @@ class SablonServiceProvider extends ServiceProvider {
 		
 		// register theme view namespace
 		$this->themeNamespace();
+		$this->registerListener();
 		
-		// include sablon demo routes
+		// include sablon helpers & demo routes
+		include __DIR__.'/../../helpers.php';
 		include __DIR__.'/../../routes.php';
 	}
 
@@ -37,14 +39,30 @@ class SablonServiceProvider extends ServiceProvider {
 		$app = $this->app;
 		// get default theme from config
         $theme = $app['config']->get('sablon::theme', 'default');
-        // register theme namespace directory
+
         if ($theme == 'default') {
-	        $app['view']->addNamespace('theme', app_path('views/packages/empu/sablon/Aql2'));
+        	$theme = 'Aql2';
+        	$theme_basepath = app_path('views/packages/empu/sablon');
         }
         else {
-			$theme_path = $app['config']->get('sablon::themes_path');
-	        $app['view']->addNamespace('theme', "{$theme_path}/{$theme}");
+			$theme_basepath = $app['config']->get('sablon::themes_path');
         }
+
+		$app['config']->set('sablon::theme', $theme);
+		$app['config']->set('sablon::theme_basepath', $theme_basepath);
+        // register theme namespace directory
+        $app['view']->addNamespace('theme', "{$theme_basepath}/{$theme}");
+	}
+
+	protected function registerListener()
+	{
+		$app = $this->app;
+		$app['events']->listen('composing: theme::layouts.base', function() use ($app) {
+	        // set url to theme assets
+	        $theme = $app['config']->get('sablon::theme');
+	        $asset_basepath = str_replace(app_path('views/'), '', $app['config']->get('sablon::theme_basepath'));
+	        $app['config']->set('sablon::theme_asset', "{$asset_basepath}/{$theme}");
+		});
 	}
 
 	/**
