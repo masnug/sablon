@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  {% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description|default('Nusantara, fast start your laravel web project, coding under pleasure.') }}">
+    <meta name="keywords" content="{{ keywods|default(['Nusantara', 'Starter', 'App', 'Bootstrap', 'Laravel'])|join(',') }}">
+    <meta name="author" content="{{ author|default('Wuri Nugrahadi <nug@nusacreation.com>') }}">
+    <link rel="shortcut icon" href="{{ asset('packages/empu/sablon/Aql2/ico/favicon.png') }}">
+    <title>{{ title|default('Starter App') }} · {{ site|default('Nusantara') }}</title>
+
+    {% include 'theme::partials.head_scripts' %}
+  {% endblock %}
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">Project name</h3>
+      </div>
+
+      {% block layout %}
+          {% block content %}{% endblock %}
+      {% endblock %}
+
+      <div class="footer">
+        <p>&copy; Company 2014</p>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

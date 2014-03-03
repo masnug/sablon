@@ -1,0 +1,25 @@
+{% extends 'theme::layouts.base' %}
+
+{% block layout %}
+  
+  {# {% include 'theme::widgets.masthead' %}
+
+  <div class="body-box">
+  
+    <div class="sidebar">
+      {% include 'theme::widgets.sidenav' %}
+    </div>
+    
+    <div class="container" id="container-wrapper">
+      
+      {% include 'theme::widgets.page_header' %}
+  #}  
+      <div class="main-container">
+        {% block content %}{% endblock %}
+      </div>
+  {#
+    </div> <!-- /container -->
+
+  </div>
+  #}
+{% endblock %}
