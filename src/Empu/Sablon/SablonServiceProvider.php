@@ -57,7 +57,8 @@ class SablonServiceProvider extends ServiceProvider {
 	protected function registerListener()
 	{
 		$app = $this->app;
-		$app['events']->listen('composing: theme::layouts.base', function() use ($app) {
+		// ga tau nih, tiba2 event compose: theme::layoust.base ga di triger
+		$app['events']->listen('twigbridge.twig', function() use ($app) {
 	        // set url to theme assets
 	        $theme = $app['config']->get('sablon::theme');
 	        $asset_basepath = str_replace(app_path('views/'), '', $app['config']->get('sablon::theme_basepath'));
